@@ -14,14 +14,14 @@ public class Main {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        Locker locker = new Locker();
-        locker.setName("lockerA");
-        entityManager.persist(locker);
-
-        Member member = new Member();
-        member.setUsername("memberA");
-        member.setLocker(locker);
-        entityManager.persist(member);
+//        Locker locker = new Locker();
+//        locker.setName("lockerA");
+//        entityManager.persist(locker);
+//
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        member.setLocker(locker);
+//        entityManager.persist(member);
 //
 //        entityManager.flush();
 //        entityManager.clear();
@@ -30,14 +30,14 @@ public class Main {
 //        Locker findLocker = findMember.getLocker();
 //
 //        System.out.println("findLocker.getName() = " + findLocker.getName());
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Locker findLocker = entityManager.find(Locker.class, locker.getId());
-        Member findMember = findLocker.getMember();
-
-        System.out.println("findMember2.getUsername() = " + findMember.getUsername());
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Locker findLocker = entityManager.find(Locker.class, locker.getId());
+//        Member findMember = findLocker.getMember();
+//
+//        System.out.println("findMember2.getUsername() = " + findMember.getUsername());
 
         transaction.commit();
         entityManager.close();

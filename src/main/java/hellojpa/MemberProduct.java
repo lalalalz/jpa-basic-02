@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Entity
+//@Entity
 public class MemberProduct {
 
     @Id @GeneratedValue

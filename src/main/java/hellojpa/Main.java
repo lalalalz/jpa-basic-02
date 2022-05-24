@@ -14,6 +14,24 @@ public class Main {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
+        Movie movie = new Movie();
+        movie.setDirector("ChoiJinSoo");
+        movie.setActor("ChoiMinKyung");
+        movie.setName("바람과 함께 사라지다");
+
+        entityManager.persist(movie);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Movie findMovie = entityManager.find(Movie.class, movie.getId());
+
+        transaction.commit();
+        entityManager.close();
+        entityManagerFactory.close();
+    }
+
+    private static void 일대일양방향(EntityManager entityManager) {
 //        Locker locker = new Locker();
 //        locker.setName("lockerA");
 //        entityManager.persist(locker);
@@ -38,10 +56,6 @@ public class Main {
 //        Member findMember = findLocker.getMember();
 //
 //        System.out.println("findMember2.getUsername() = " + findMember.getUsername());
-
-        transaction.commit();
-        entityManager.close();
-        entityManagerFactory.close();
     }
 
     private static void 일대일단방향주테이블에외래키(EntityManager entityManager) {

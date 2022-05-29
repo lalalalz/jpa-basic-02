@@ -13,28 +13,88 @@ public class Main {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        Child child = new Child();
-        child.setName("childA");
 
-        Parent parent = new Parent();
-        parent.setName("parentA");
-        parent.addChild(child);
-        entityManager.persist(parent);
-        entityManager.persist(child);
-
-//        entityManager.flush();
-//        entityManager.clear();
-
-        Parent findParent = entityManager.find(Parent.class, parent.getId());
-
-        System.out.println("=============연관관계 제거=============");
-        System.out.println("findParent.getClass() = " + System.identityHashCode(findParent));
-        System.out.println("parent = " + System.identityHashCode(parent));
-        entityManager.remove(findParent);
 
         transaction.commit();
         entityManager.close();
         entityManagerFactory.close();
+    }
+
+    private static void 불변객체테스트(EntityManager entityManager) {
+//        Address address = new Address("Seoul", "Kang-Nam", "1111");
+//
+//        Member member1 = new Member();
+//        member1.setUsername("member1");
+//        member1.setAddress(address);
+//        entityManager.persist(member1);
+//
+//        Address newAddress = new Address("InCheon", "Jung-Gu", "2323");
+//        member1.setAddress(newAddress);
+    }
+
+    private void 값타입복사(EntityManager entityManager) {
+//        Address address = new Address();
+//        address.setCity("Seoul");
+//        address.setStreet("Kang-Nam");
+//        address.setZipcode("1234");
+//
+//        Member member1 = new Member();
+//        member1.setUsername("member1");
+//        member1.setAddress(address);
+//        entityManager.persist(member1);
+//
+//        Address newAddress = new Address();
+//        newAddress.setCity(address.getCity());
+//        newAddress.setStreet(address.getStreet());
+//        newAddress.setZipcode(address.getZipcode());
+//
+//        Member member2 = new Member();
+//        member2.setUsername("member2");
+//        member2.setAddress(newAddress);
+//        entityManager.persist(member2);
+//
+//        member1.getAddress().setCity("InCheon");
+    }
+
+    private static void 값타입공유참조문제테스트(EntityManager entityManager) {
+//        Address address = new Address();
+//        address.setCity("Seoul");
+//        address.setStreet("Kang-Nam");
+//        address.setZipcode("1234");
+//
+//        Member member1 = new Member();
+//        member1.setUsername("member1");
+//        member1.setAddress(address);
+//        entityManager.persist(member1);
+//
+//
+//        Member member2 = new Member();
+//        member2.setUsername("member2");
+//        member2.setAddress(address);
+//        entityManager.persist(member2);
+//
+//        member1.getAddress().setCity("InCheon");
+    }
+
+    private static void 고아객체테스트(EntityManager entityManager) {
+//        Child child = new Child();
+//        child.setName("childA");
+//
+//        Parent parent = new Parent();
+//        parent.setName("parentA");
+//        parent.addChild(child);
+//        entityManager.persist(parent);
+//        entityManager.persist(child);
+//
+////        entityManager.flush();
+////        entityManager.clear();
+//
+//        Parent findParent = entityManager.find(Parent.class, parent.getId());
+//
+//        System.out.println("=============연관관계 제거=============");
+//        System.out.println("findParent.getClass() = " + System.identityHashCode(findParent));
+//        System.out.println("parent = " + System.identityHashCode(parent));
+//        entityManager.remove(findParent);
     }
 
     private static void 영속성전이테스트(EntityManager entityManager) {
@@ -48,47 +108,47 @@ public class Main {
     }
 
     private static void nplus1문제테스트(EntityManager entityManager) {
-        Team teamA = new Team();
-        teamA.setName("teamA");
-        entityManager.persist(teamA);
-
-        Team teamB = new Team();
-        teamB.setName("teamA");
-        entityManager.persist(teamB);
-
-
-        Member memberA = new Member();
-        memberA.setUsername("memberA");
-        memberA.setTeam(teamA);
-        entityManager.persist(memberA);
-
-        Member memberB = new Member();
-        memberB.setUsername("memberB");
-        memberB.setTeam(teamB);
-        entityManager.persist(memberB);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        List<Member> members;
-        members = entityManager.createQuery("select m from Member m", Member.class).getResultList();
+//        Team teamA = new Team();
+//        teamA.setName("teamA");
+//        entityManager.persist(teamA);
+//
+//        Team teamB = new Team();
+//        teamB.setName("teamA");
+//        entityManager.persist(teamB);
+//
+//
+//        Member memberA = new Member();
+//        memberA.setUsername("memberA");
+//        memberA.setTeam(teamA);
+//        entityManager.persist(memberA);
+//
+//        Member memberB = new Member();
+//        memberB.setUsername("memberB");
+//        memberB.setTeam(teamB);
+//        entityManager.persist(memberB);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        List<Member> members;
+//        members = entityManager.createQuery("select m from Member m", Member.class).getResultList();
     }
 
     private static void 즉시로딩테스트(EntityManager entityManager) {
-        Team team = new Team();
-        team.setName("teamA");
-        entityManager.persist(team);
-
-        Member member = new Member();
-        member.setUsername("userA");
-        member.setTeam(team);
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Member findMember = entityManager.find(Member.class, member.getId());
-        System.out.println("findMember.getTeam().getClass() = " + findMember.getTeam().getClass());
+//        Team team = new Team();
+//        team.setName("teamA");
+//        entityManager.persist(team);
+//
+//        Member member = new Member();
+//        member.setUsername("userA");
+//        member.setTeam(team);
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member findMember = entityManager.find(Member.class, member.getId());
+//        System.out.println("findMember.getTeam().getClass() = " + findMember.getTeam().getClass());
     }
 
     private static void 지연로딩테스트(EntityManager entityManager) {
@@ -113,22 +173,22 @@ public class Main {
     }
 
     private static void 프록시강제초기화편의메서드테스트(EntityManagerFactory entityManagerFactory, EntityManager entityManager) {
-        Member member = new Member();
-        member.setUsername("memberA");
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        PersistenceUnitUtil persistenceUnitUtil = entityManagerFactory.getPersistenceUnitUtil();
-
-        System.out.println("================== 초기화 이전 ====================");
-        Member findMember = entityManager.getReference(Member.class, member.getId());
-        System.out.println("persistenceUnitUtil.isLoaded(findMember) = " + persistenceUnitUtil.isLoaded(findMember));
-
-        System.out.println("================== 초기화 이후 ====================");
-        Hibernate.initialize(findMember);
-        System.out.println("persistenceUnitUtil.isLoaded(findMember) = " + persistenceUnitUtil.isLoaded(findMember));
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        PersistenceUnitUtil persistenceUnitUtil = entityManagerFactory.getPersistenceUnitUtil();
+//
+//        System.out.println("================== 초기화 이전 ====================");
+//        Member findMember = entityManager.getReference(Member.class, member.getId());
+//        System.out.println("persistenceUnitUtil.isLoaded(findMember) = " + persistenceUnitUtil.isLoaded(findMember));
+//
+//        System.out.println("================== 초기화 이후 ====================");
+//        Hibernate.initialize(findMember);
+//        System.out.println("persistenceUnitUtil.isLoaded(findMember) = " + persistenceUnitUtil.isLoaded(findMember));
     }
 
     private static void 프록시초기화여부편의메서드테스트(EntityManagerFactory entityManagerFactory, EntityManager entityManager, Member member) {
@@ -153,36 +213,36 @@ public class Main {
     }
 
     private static void 준영속상태일때초기화안됨테스트(EntityManager entityManager) {
-        Member member = new Member();
-        member.setUsername("memberA");
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Member findMember = entityManager.getReference(Member.class, member.getId());
-
-        entityManager.detach(findMember);
-
-        System.out.println("findMember.getUsername() = " + findMember.getUsername());
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member findMember = entityManager.getReference(Member.class, member.getId());
+//
+//        entityManager.detach(findMember);
+//
+//        System.out.println("findMember.getUsername() = " + findMember.getUsername());
     }
 
     private static void 영속컨텍스트에있을때실제엔티티반환(EntityManager entityManager) {
-        Member member = new Member();
-        member.setUsername("memberA");
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Member realMember = entityManager.find(Member.class, member.getId());
-        System.out.println("realMember.getClass() = " + realMember.getClass());
-
-        Member refMember = entityManager.getReference(Member.class, member.getId());
-        System.out.println("findMember.getClass() = " + refMember.getClass());
-
-        entityManager.flush();
-        entityManager.clear();
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member realMember = entityManager.find(Member.class, member.getId());
+//        System.out.println("realMember.getClass() = " + realMember.getClass());
+//
+//        Member refMember = entityManager.getReference(Member.class, member.getId());
+//        System.out.println("findMember.getClass() = " + refMember.getClass());
+//
+//        entityManager.flush();
+//        entityManager.clear();
 //
 //        Member refMember2 = entityManager.getReference(Member.class, member.getId());
 //        String username = refMember2.getUsername();
@@ -193,31 +253,31 @@ public class Main {
     }
 
     private static void 타입비교테스트(EntityManager entityManager) {
-        Member member = new Member();
-        member.setUsername("memberA");
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Member findMember = entityManager.getReference(Member.class, member.getId());
-        System.out.println("findMember.getClass() == member.getClass() = " + (findMember.getClass() == member.getClass()));
-        System.out.println("findMember instance of Member = " + (findMember instanceof Member));
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member findMember = entityManager.getReference(Member.class, member.getId());
+//        System.out.println("findMember.getClass() == member.getClass() = " + (findMember.getClass() == member.getClass()));
+//        System.out.println("findMember instance of Member = " + (findMember instanceof Member));
     }
 
     private static void 프록시초기화이후에도교체되지않음테스트(EntityManager entityManager) {
-        Member member = new Member();
-        member.setUsername("memberA");
-        entityManager.persist(member);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Member findMember = entityManager.getReference(Member.class, member.getId());
-        System.out.println("findMember.getClass() = " + findMember.getClass());
-        System.out.println("findMember.getUsername() = " + findMember.getUsername());
-        System.out.println("=============================================");
-        System.out.println("findMember.getClass() = " + findMember.getClass());
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        entityManager.persist(member);
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member findMember = entityManager.getReference(Member.class, member.getId());
+//        System.out.println("findMember.getClass() = " + findMember.getClass());
+//        System.out.println("findMember.getUsername() = " + findMember.getUsername());
+//        System.out.println("=============================================");
+//        System.out.println("findMember.getClass() = " + findMember.getClass());
     }
 
     private static void 프록시초기화는최초한번만테스트(EntityManager entityManager) {

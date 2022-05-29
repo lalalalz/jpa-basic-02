@@ -16,11 +16,29 @@ public class Member {
     private Long id;
     private String username;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    @ElementCollection
+    @CollectionTable(
+            name = "ADDRESS",
+            joinColumns = @JoinColumn(name = "MEMBER_ID")
+    )
+    private List<Address> addresses = new ArrayList<>();
 
-//    @OneToOne
+//    @Embedded
+//    private Address address;
+
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name = "city", column = @Column(name = "workCity")),
+//            @AttributeOverride(name = "street", column = @Column(name = "workStreet")),
+//            @AttributeOverride(name = "zipcode", column = @Column(name = "workZipcode"))
+//    })
+//    private Address workAddress;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "TEAM_ID")
+//    private Team team;
+//
+////    @OneToOne
 //    @JoinColumn(name = "LOCKER_ID")
 //    private Locker locker;
 //

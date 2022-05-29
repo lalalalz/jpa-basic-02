@@ -13,11 +13,41 @@ public class Main {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
+        AddressHistory addressHistory1 = new AddressHistory(new Address("Seoul", "Gang-Nam", "1000"));
+        AddressHistory addressHistory2 = new AddressHistory(new Address("Incheon", "Jung-Gu", "1234"));
 
+        Member member = new Member();
+        member.setUsername("memberA");
+        member.getAddressHistory().add(addressHistory1);
+        member.getAddressHistory().add(addressHistory2);
+
+        entityManager.persist(member);
+        entityManager.flush();
+        entityManager.clear();
+
+        System.out.println("==================================");
+
+        Member findMember = entityManager.find(Member.class, member.getId());
+        findMember.getAddressHistory().get(0).setAddress(new Address("Seoul", "Hong-Dae", "1000"));
 
         transaction.commit();
         entityManager.close();
         entityManagerFactory.close();
+    }
+
+    private static void 값타입컬렉션제약사항(EntityManager entityManager) {
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//        member.getAddressHistory().add(new Address("Seoul", "Gang-Nam", "1000"));
+//        member.getAddressHistory().add(new Address("Incheon", "Jung-Gu", "1234"));
+//
+//        entityManager.persist(member);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Member findMember = entityManager.find(Member.class, member.getId());
+//        findMember.getAddressHistory().remove(0);
+//        findMember.getAddressHistory().add(new Address("Seoul", "Hong-Dae", "2323"));
     }
 
     private static void 불변객체테스트(EntityManager entityManager) {

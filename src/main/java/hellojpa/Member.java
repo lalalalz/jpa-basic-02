@@ -16,12 +16,16 @@ public class Member {
     private Long id;
     private String username;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "ADDRESS",
-            joinColumns = @JoinColumn(name = "MEMBER_ID")
-    )
-    private List<Address> addresses = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressHistory> addressHistory = new ArrayList<>();
+
+//    @ElementCollection
+//    @CollectionTable(
+//            name = "ADDRESS_HISTORY",
+//            joinColumns = @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Address> addressHistory = new ArrayList<>();
 
 //    @Embedded
 //    private Address address;
